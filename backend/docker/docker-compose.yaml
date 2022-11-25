@@ -1,0 +1,9 @@
+services:
+  bard-coffe-mongodb:
+    image: mongo:5.0
+    container_name: bard-coffe-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=BardCoffeMongo
+      - MONGO_INITDB_ROOT_PASSWORD=bardcoffe
+    ports:
+      - "27018:27017"

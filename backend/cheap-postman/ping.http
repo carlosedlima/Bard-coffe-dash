@@ -1,0 +1,5 @@
+###
+@path = http://localhost
+@port = 3030
+
+GET {{path}}:{{port}}/ping HTTP/1.1

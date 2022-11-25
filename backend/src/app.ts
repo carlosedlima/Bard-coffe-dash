@@ -1,11 +1,13 @@
 import express, { Application } from 'express'
 import cors from 'cors'
+import { AppRoutes } from './routes'
+import { mongoDb } from './database'
 
 class App {
     port: string
 
     constructor() {
-        this.port = process.env.PORT || '3030'
+        this.port = process.env.PORT || '3050'
     }
 
     private buildMiddlewares(app: Application) {
@@ -20,9 +22,16 @@ class App {
         )
     }
 
+    private buildRoutes(app: Application) {
+        const router = new AppRoutes(app)
+        router.buildRoutes();
+    }
+
     public buildServer() {
         const server = express();
         this.buildMiddlewares(server);
+        this.buildRoutes(server);
+        mongoDb.connectDatabase();
         
         server.listen(this.port, () => {
             console.log(`Servidor iniciado na porta: ${this.port}`)
